@@ -70,7 +70,7 @@ export function mapProduct(item: ProductApiItem): MarketplaceProduct {
     sellerId: item.sellerId || "",
     sellerName: item.sellerName || "Seller",
     sellerRating: toNumber(item.sellerRating),
-    sellerType: "Vendor",
+    sellerType: "Individual",
     status,
     complianceApproved: item.approvalStatus === "APPROVED",
     createdAt: item.createdAt || "",

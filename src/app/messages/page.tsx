@@ -760,7 +760,7 @@ export default function MessagesPage() {
                                             {muted ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
                                         </button>
                                     )}
-                                    <button type="button" onClick={callPhase === "incoming" ? declineCall : endCall} className="flex h-12 items-center gap-2 rounded-2xl bg-red-500 px-5 text-sm font-bold">
+                                    <button type="button" onClick={endCall} className="flex h-12 items-center gap-2 rounded-2xl bg-red-500 px-5 text-sm font-bold">
                                         <PhoneOff className="h-5 w-5" /> {t.messagesPage.endCall}
                                     </button>
                                 </>
