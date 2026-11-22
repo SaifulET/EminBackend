@@ -76,7 +76,7 @@ export default function MarketplacePage() {
   const loadProducts = async () => {
     const data = await apiRequest<ApiPage<ProductApiItem>>("/products?page=1&limit=100");
     const publicListings = data.items.filter(
-      (item) => (item.status === "ACTIVE" || item.status === "SOLD") && item.approvalStatus !== "REJECTED"
+      (item) => (item.status === "ACTIVE" || item.status === "SOLD") && item.approvalStatus === "APPROVED"
     );
     setProducts(publicListings.map(mapProduct));
   };

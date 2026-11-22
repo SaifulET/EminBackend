@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://odaboo.ch"),
   title: "Odaboo | Find Expert Services For Any Need",
   description: "Connect with trusted professionals for your home, business, and personal needs. Book appointments, manage payments, and get things done.",
   icons: {

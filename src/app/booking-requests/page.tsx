@@ -62,11 +62,9 @@ export default function BookingRequestsProviderPage() {
         const userId = localStorage.getItem("user_id");
         if (!userId) return;
         Promise.all([
-            apiRequest<ApiPage<BookingApi>>("/bookings?page=1&limit=100"),
-            apiRequest<ApiPage<{ _id: string; providerUserId?: string }>>("/services?page=1&limit=100"),
-        ]).then(([bookings, services]) => {
-            const mine = new Set(services.items.filter((item) => item.providerUserId === userId).map((item) => item._id));
-            setAllRequests(bookings.items.filter((item) => item.serviceId && mine.has(String(item.serviceId))).map((item) => {
+            apiRequest<ApiPage<BookingApi>>("/bookings/provider?page=1&limit=100"),
+        ]).then(([bookings]) => {
+            setAllRequests(bookings.items.map((item) => {
                 const date = item.scheduledAt ? new Date(item.scheduledAt) : null;
                 const valid = date && !Number.isNaN(date.getTime());
                 return {

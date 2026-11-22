@@ -118,7 +118,7 @@ export function ProductAIChatModal({
                 {isDe ? "Preisangebot an Verkäufer" : "Make an Offer to Seller"}
               </h2>
               <p className="text-xs text-slate-500">
-                {isDe ? "Direktes Angebot mit Käuferschutz" : "Direct verified offer with escrow protection"}
+                {isDe ? "Angebot (noch nicht verbindlich server-seitig)" : "Offer preview (not yet server-verified)"}
               </p>
             </div>
           </div>

@@ -58,7 +58,6 @@ export function CheckoutModal({
         body: JSON.stringify({
           purpose: "MARKETPLACE",
           productId: product.id,
-          amount: finalTotal,
           shipping: { fullName, phone, addressLine1: address, city, postalCode, country: "Switzerland" },
         }),
       });

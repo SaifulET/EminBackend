@@ -1,6 +1,6 @@
 import { compressImage } from "@/lib/compress-image";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://api.odaboo.ch";
 
 export async function apiRequest<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = typeof window !== "undefined" ? window.localStorage.getItem("auth_token") : null;

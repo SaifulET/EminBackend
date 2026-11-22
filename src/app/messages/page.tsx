@@ -177,16 +177,17 @@ export default function MessagesPage() {
     );
 
     useEffect(() => {
+        const token = typeof window !== "undefined" ? window.localStorage.getItem("auth_token") : null;
         const socket = io(apiUrl, {
             transports: ["websocket", "polling"],
             withCredentials: true,
+            auth: token ? { token } : undefined,
         });
         socketRef.current = socket;
 
         socket.on("connect", () => {
             setIsConnected(true);
-            const userId = getCurrentUserId();
-            if (userId) socket.emit("joinUser", { userId });
+            socket.emit("joinUser");
         });
         socket.on("disconnect", () => setIsConnected(false));
         socket.on("callSignal", (signal: CallSignal) => onCallSignalRef.current(signal));
@@ -251,7 +252,7 @@ export default function MessagesPage() {
         if (!userId) return;
         Promise.all([
             apiRequest<ApiPage<ConversationApi>>("/conversations?page=1&limit=100").catch(() => ({ items: [] as ConversationApi[] })),
-            apiRequest<SupportTicketApi[]>(`/support-tickets/mine?userId=${userId}`).catch(() => [] as SupportTicketApi[]),
+            apiRequest<SupportTicketApi[]>(`/support-tickets/mine`).catch(() => [] as SupportTicketApi[]),
         ])
             .then(async ([data, tickets]) => {
                 const mine = data.items.filter((item) => (item.participants ?? []).map(String).includes(userId));

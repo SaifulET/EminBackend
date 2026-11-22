@@ -201,7 +201,6 @@ export default function SellerUploadPage() {
             sellerName: localStorage.getItem("user_name") || "Seller",
             sellerRating: 0,
             status: statusToApi(status),
-            approvalStatus: "APPROVED",
             shippingTerms,
             returnPolicy,
             customFaq,

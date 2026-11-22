@@ -82,15 +82,11 @@ export default function MyBookingsCustomerPage() {
         const email = (localStorage.getItem("user_email") || "").toLowerCase();
         if (!userId && !email) return;
         Promise.all([
-            apiRequest<ApiPage<BookingApi>>("/bookings?page=1&limit=100"),
+            apiRequest<ApiPage<BookingApi>>("/bookings/mine?page=1&limit=100"),
             apiRequest<ApiPage<ServiceApi>>("/services?page=1&limit=100").catch(() => ({ items: [], meta: { page: 1, limit: 100, total: 0, pages: 0 } })),
         ]).then(([bookings, services]) => {
             const byService = new Map(services.items.map((item) => [item._id, item]));
-            const mine = bookings.items.filter((item) =>
-                (userId && String(item.customerId) === userId) ||
-                (email && item.customerEmail?.toLowerCase() === email)
-            );
-            setAllBookings(mine.map((item) => {
+            setAllBookings(bookings.items.map((item) => {
                 const service = item.serviceId ? byService.get(String(item.serviceId)) : undefined;
                 const when = formatWhen(item.scheduledAt);
                 const providerName = service?.providerName || "Service provider";
